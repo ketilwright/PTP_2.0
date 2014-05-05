@@ -42,6 +42,7 @@ e-mail   :  support@circuitsathome.com
 #define PTP_OC_NIKON_MfDrive						0x9204
 #define PTP_OC_NIKON_ChangeAfArea					0x9205
 #define PTP_OC_NIKON_AfDriveCancel					0x9206
+#define PTP_OC_NIKON_CaptureRecInMedia				0x9207
 
 
 // Nikon extention response codes

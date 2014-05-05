@@ -59,7 +59,7 @@ void ImgQualitySupplier::GetData(const uint16_t len, uint8_t *pbuf)
 	((uint32_t*)pbuf)[2] =	(uint32_t) num_files;
 
 	uint32_t	format = pictFormat;
-	
+
 	for (uint8_t i=0, pos=3; i<num_files; i++)
 	{
 		((uint32_t*)pbuf)[pos++] = 0x00000010;
@@ -112,15 +112,15 @@ uint8_t CanonEOS::Init(uint8_t parent, uint8_t port, bool lowspeed)
 	// Restore p->epinfo
 	p->epinfo = oldep_ptr;
 
-	if( rcode ) 
+	if( rcode )
 	{
 		PTPTRACE2("getDevDesc:", rcode);
 		return rcode;
 	}
-
-	if (((USB_DEVICE_DESCRIPTOR*)buf)->idVendor == 0x04A9)
+    USB_DEVICE_DESCRIPTOR *devDesc = reinterpret_cast<USB_DEVICE_DESCRIPTOR*>(buf);
+    if (devDesc->idVendor == 0x04A9)
 		return PTP::Init(parent, port, lowspeed);
-	else 
+	else
 	{
 		PTPTRACE("Camera isn't Canon\r\n");
 		return USB_DEV_CONFIG_ERROR_DEVICE_NOT_SUPPORTED;
@@ -178,7 +178,7 @@ uint16_t CanonEOS::StopBulb()
 	params[1] = 0x00001000;
 	params[2] = 0x00000000;
 	Operation(0x911A, 3, params);
-    
+
     params[0] = 0xfffffffc;
 	Operation(0x911A, 3, params);
 	Operation(0x9126, 0, NULL);

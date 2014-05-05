@@ -18,7 +18,7 @@ e-mail   :  support@circuitsathome.com
 #define __NKEVENTPARSER_H__
 
 #include <Usb.h>
-#include <nikon.h>
+#include "nikon.h"
 
 struct NKEvent
 {
@@ -81,8 +81,9 @@ class NKEventParser : public PTPReadParser
 
 public:
 	NKEventParser(NKEventHandlers *p) :
+        constInitialEventCode(0xFFFF),
 		pHandler(p),
-		constInitialEventCode(0xFFFF),
+
 		nStage(0),
 		numEvents(0)
 		{

@@ -36,10 +36,11 @@ e-mail   :  support@circuitsathome.com
 
 #define PTP_USB_INT_PACKET_LEN	8
 
+
 /* PTP USB Asynchronous Event Interrupt Data Format */
-struct PTPUSBEventContainer 
+struct PTPUSBEventContainer
 {
-	uint32_t length;
+    uint32_t length;
 	uint16_t type;
 	uint16_t code;
 	uint32_t trans_id;
@@ -307,4 +308,4 @@ struct PTPUSBEventContainer
 #define PTP_DPGS_Get						0x00
 #define PTP_DPGS_GetSet						0x01
 
-#endif //__PTPCONST_H__ 
+#endif //__PTPCONST_H__

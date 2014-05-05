@@ -37,6 +37,58 @@ e-mail   :  support@circuitsathome.com
 
 #define FAILED(rc)(rc != PTP_RC_OK)
 
+struct PTPUSBContainer
+{
+    uint32_t length;
+    uint16_t type;
+    uint16_t code;
+    uint32_t trans_id;
+    PTPUSBContainer(uint16_t _type, uint16_t _opCode, uint32_t _trans_id)
+        :
+        length(0), // caller fills in later
+        type(_type),
+        code(_opCode),
+        trans_id(_trans_id)
+    {}
+};
+
+struct PTPUSBCommandContainer : public PTPUSBContainer
+{
+    uint32_t param1;
+    uint32_t param2;
+    uint32_t param3;
+    PTPUSBCommandContainer(uint16_t _opCode, uint32_t _trans_id)
+        :
+        PTPUSBContainer(PTP_USB_CONTAINER_COMMAND, _opCode, _trans_id),
+        param1(0),
+        param2(0),
+        param3(0)
+    {}
+};
+
+struct PTPUSBDataContainer : public PTPUSBContainer
+{
+    uint8_t data[PTP_MAX_RX_BUFFER_LEN - sizeof(PTPUSBContainer)]; // is this really the correct length?
+    PTPUSBDataContainer(uint16_t _opcode, uint32_t _trans_id)
+        :
+        PTPUSBContainer(PTP_USB_CONTAINER_DATA, _opcode, _trans_id)
+    {
+        ::memset(data, sizeof(data), 0);
+    }
+};
+
+struct PTPUSBResponseContainer : public PTPUSBContainer
+{
+    uint8_t data[PTP_MAX_RX_BUFFER_LEN - sizeof(PTPUSBContainer)];
+    PTPUSBResponseContainer()
+        :
+        PTPUSBContainer(0, PTP_RC_GeneralError, 0) // usb transaction fills remaining fields
+    {
+        ::memset(data, sizeof(data), 0);
+    }
+};
+
+
 class PTP;
 class PTPReadParser;
 class PTPDataSupplier;
@@ -93,7 +145,7 @@ protected:
 	typedef void (*READPARSER)(const uint16_t len, const uint8_t *pbuf, const uint32_t &offset);
 
 	void FillEPRecords(USB_ENDPOINT_DESCRIPTOR *pep);
-
+    // ketil: huh? what's wrong with using memset?
 	void ZerroMemory(uint8_t size, uint8_t *mem) { for (uint8_t i=0; i<size; i++) mem[i] = 0; };
 
 	// waits for any event to occur
@@ -104,7 +156,8 @@ protected:
 	// the actual data is stored in a buffer pointed by buf
 	bool CheckEvent(uint8_t size, uint8_t *buf);
 
-	uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params, void *pVoid);
+	uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = NULL, void *pVoid = NULL);
+    // uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params, void *pVoid);
 
 public:
 	PTP(USB *pusb, PTPStateHandlers *s);

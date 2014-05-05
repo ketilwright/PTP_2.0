@@ -59,15 +59,15 @@ uint8_t NikonDSLR::Init(uint8_t parent, uint8_t port, bool lowspeed)
 	// Restore p->epinfo
 	p->epinfo = oldep_ptr;
 
-	if( rcode ) 
+	if( rcode )
 	{
 		PTPTRACE2("getDevDesc:", rcode);
 		return rcode;
 	}
-
-	if (((USB_DEVICE_DESCRIPTOR*)buf)->idVendor == 0x04B0)
+    USB_DEVICE_DESCRIPTOR *devDesc = reinterpret_cast<USB_DEVICE_DESCRIPTOR*>(buf);
+	if (devDesc->idVendor == 0x04B0)
 		return PTP::Init(parent, port, lowspeed);
-	else 
+	else
 	{
 		PTPTRACE("Camera isn't Nikon\r\n");
 		return USB_DEV_CONFIG_ERROR_DEVICE_NOT_SUPPORTED;
@@ -104,7 +104,7 @@ uint16_t NikonDSLR::GetLiveViewImage(PTPReadParser *parser)
 
 uint16_t NikonDSLR::MoveFocus(uint8_t direction, uint16_t step)
 {
-	OperFlags	flags		= { 2, 0, 0, 0, 0, 0 };
+    OperFlags	flags		= { 2, 0, 0, 0, 0, 0 };
 
 	uint32_t	params[2];
 	params[0]	= (uint32_t)direction;
