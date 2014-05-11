@@ -31,11 +31,15 @@ void PTPStateHandlers::OnDeviceDisconnectedState(PTP *ptp)
 
 void PTPStateHandlers::OnSessionNotOpenedState(PTP *ptp)
 {
-	if (ptp->OpenSession() == PTP_RC_OK)
+    if (ptp->OpenSession() == PTP_RC_OK)
 	{
 		PTPTRACE("Session opened\r\n");
-		ptp->SetState(PTP_STATE_SESSION_OPENED);
+    	ptp->SetState(PTP_STATE_SESSION_OPENED);
 	}
+    else
+    {
+        PTPTRACE("Failed Session open\r\n");
+    }
 }
 
 void PTPStateHandlers::OnSessionOpenedState(PTP *ptp)
@@ -149,8 +153,7 @@ uint8_t PTP::Init(uint8_t parent, uint8_t port, bool lowspeed)
 	p->epinfo = epInfo;
 
 	// Get device descriptor
-	//rcode = pUsb->getDevDescr( 0, 0, 8, (uint8_t*)buf );
-    rcode = pUsb->getDevDescr( 0, 0, 8, buf );
+	rcode = pUsb->getDevDescr( 0, 0, 8, buf );
 
 	if  (!rcode)
 		len = (buf[0] > 32) ? 32 : buf[0];
@@ -326,33 +329,37 @@ uint8_t PTP::Poll()
 
 void PTP::Task()
 {
-	switch (theState)
+    switch (theState)
 	{
-	//case PTP_STATE_DEVICE_DISCONNECTED:
-//		idSession = 0;
-//		idTransaction = ~((trasaction_id_t)0);
-//		if (stateMachine)
-	//		stateMachine->OnDeviceDisconnectedState(this);
-	//	break;
-	case PTP_STATE_SESSION_NOT_OPENED:
+    case PTP_STATE_SESSION_NOT_OPENED:
 		if (stateMachine)
+        {
 			stateMachine->OnSessionNotOpenedState(this);
+        }
 		break;
 	case PTP_STATE_SESSION_OPENED:
 		if (stateMachine)
+        {
 			stateMachine->OnSessionOpenedState(this);
+        }
 		break;
 	case PTP_STATE_DEVICE_INITIALIZED:
 		if (stateMachine)
+        {
 			stateMachine->OnDeviceInitializedState(this);
+        }
 		break;
 	case PTP_STATE_DEVICE_NOT_RESPONDING:
 		if (stateMachine)
+        {
 			stateMachine->OnDeviceNotRespondingState(this);
+        }
 		break;
 	case PTP_STATE_DEVICE_BUSY:
 		if (stateMachine)
+        {
 			stateMachine->OnDeviceBusyState(this);
+        }
 		break;
 	// Error state
 	default:
@@ -421,7 +428,6 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params/* 
                 }
             }
             dataContainer.length = bytes_left;
-            Serial.print("bytes_left: "); Serial.print(bytes_left); Serial.print(" lengthPerOutTransfer: "); Serial.print(lengthPerOutTransfer); Serial.println();
             bool first_time = true;
 
             while (bytes_left)
@@ -458,7 +464,6 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params/* 
 
             if (rcode)
             {
-                Serial.print("failed in transfer rcode: "); Serial.print(rcode, HEX); Serial.println();
                 PTPTRACE("Fatal USB Error\r\n");
 
                 // in some cases NAK handling might be necessary
@@ -518,8 +523,6 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params/* 
                         ((uint8_t*)pVoid)[j] = reinterpret_cast<uint8_t*>(&responseContainer)[i];
                     }
                 }
-
-
             }
             data_off += inbuffer;
             loops++;
@@ -527,7 +530,6 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params/* 
         } // while(1)
     } // end of scope
 }
-
 
 uint16_t PTP::EventCheck(PTPReadParser *pParser)
 {
@@ -616,8 +618,8 @@ uint16_t PTP::OpenSession()
 	idSession		= 1;
 	idTransaction	= ~((transaction_id_t)0);
 
-	params[0]	= idSession;
 
+	params[0]	= idSession;
 	uint16_t ret = Transaction(PTP_OC_OpenSession, &flags, params);
 
 	if (ret == PTP_RC_SessionAlreadyOpened)
@@ -626,6 +628,7 @@ uint16_t PTP::OpenSession()
     }
 	return ret;
 }
+
 
 uint16_t PTP::ResetDevice()
 {

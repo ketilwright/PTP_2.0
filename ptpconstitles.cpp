@@ -14,56 +14,55 @@ Circuits At Home, LTD
 Web      :  http://www.circuitsathome.com
 e-mail   :  support@circuitsathome.com
 */
-
 #include "ptpconstitles.h"
 
-const char* const ptpopNames[] PROGMEM = 
+const char* const ptpopNames[] PROGMEM =
 {
-	msgUndefined,				
-	msgGetDeviceInfo,			
-	msgOpenSession,			
-	msgCloseSession,			
-	msgGetStorageIDs,			
-	msgGetStorageInfo,		
-	msgGetNumObjects,			
-	msgGetObjectHandles,		
-	msgGetObjectInfo,			
-	msgGetObject,				
-	msgGetThumb,				
-	msgDeleteObject,			
-	msgSendObjectInfo,		
-	msgSendObject,			
-	msgInitiateCapture,		
-	msgFormatStore,			
-	msgResetDevice,			
-	msgSelfTest,				
-	msgSetObjectProtection,	
-	msgPowerDown,				
-	msgGetDevicePropDesc,		
-	msgGetDevicePropValue,	
-	msgSetDevicePropValue,	
-	msgResetDevicePropValue,	
-	msgTerminateOpenCapture,	
-	msgMoveObject,			
-	msgCopyObject,			
-	msgGetPartialObject,		
-	msgInitiateOpenCapture	
+	msgUndefined,
+	msgGetDeviceInfo,
+	msgOpenSession,
+	msgCloseSession,
+	msgGetStorageIDs,
+	msgGetStorageInfo,
+	msgGetNumObjects,
+	msgGetObjectHandles,
+	msgGetObjectInfo,
+	msgGetObject,
+	msgGetThumb,
+	msgDeleteObject,
+	msgSendObjectInfo,
+	msgSendObject,
+	msgInitiateCapture,
+	msgFormatStore,
+	msgResetDevice,
+	msgSelfTest,
+	msgSetObjectProtection,
+	msgPowerDown,
+	msgGetDevicePropDesc,
+	msgGetDevicePropValue,
+	msgSetDevicePropValue,
+	msgResetDevicePropValue,
+	msgTerminateOpenCapture,
+	msgMoveObject,
+	msgCopyObject,
+	msgGetPartialObject,
+	msgInitiateOpenCapture
 };
 
-const char* const mtpopNames[] PROGMEM = 
+const char* const mtpopNames[] PROGMEM =
 {
-	msgUndefined,				
-	msgGetObjectPropsSupported,	
-	msgGetObjectPropDesc,			
-	msgGetObjectPropValue,		
-	msgSetObjectPropValue,		
-	msgGetObjectPropList,			
-	msgSetObjectPropList,			
-	msgGetInterdependentPropDesc,	
-	msgSendObjectPropList		
+	msgUndefined,
+	msgGetObjectPropsSupported,
+	msgGetObjectPropDesc,
+	msgGetObjectPropValue,
+	msgSetObjectPropValue,
+	msgGetObjectPropList,
+	msgSetObjectPropList,
+	msgGetInterdependentPropDesc,
+	msgSendObjectPropList
 };
 
-const char* const ptpevNames[] PROGMEM = 
+const char* const ptpevNames[] PROGMEM =
 {
 	msgUndefined,
 	msgCancelTransaction,
@@ -82,102 +81,102 @@ const char* const ptpevNames[] PROGMEM =
 	msgUnreportedStatus
 };
 
-const char* const mtpevNames[] PROGMEM = 
+const char* const mtpevNames[] PROGMEM =
 {
 	msgUndefined,
-	msgObjectPropChanged,		
-	msgObjectPropDescChanged,	
+	msgObjectPropChanged,
+	msgObjectPropDescChanged,
 	msgObjectReferencesChanged
 };
 
-const char* const ptpprNames[] PROGMEM = 
+const char* const ptpprNames[] PROGMEM =
 {
-	msgUndefined,					
-	msgBatteryLevel,				
-	msgFunctionalMode,			
-	msgImageSize,					
-	msgCompressionSetting,		
-	msgWhiteBalance,				
-	msgRGBGain,					
-	msgFNumber,					
-	msgFocalLength,				
-	msgFocusDistance,				
-	msgFocusMode,					
-	msgExposureMeteringMode,		
-	msgFlashMode,					
-	msgExposureTime,				
-	msgExposureProgramMode,		
-	msgExposureIndex,				
-	msgExposureBiasCompensation,	
-	msgDateTime,					
-	msgCaptureDelay,				
-	msgStillCaptureMode,			
-	msgContrast,					
-	msgSharpness,					
-	msgDigitalZoom,				
-	msgEffectMode,				
-	msgBurstNumber,				
-	msgBurstInterval,				
-	msgTimelapseNumber,			
-	msgTimelapseInterval,			
-	msgFocusMeteringMode,			
-	msgUploadURL,					
-	msgArtist,					
-	msgCopyrightInfo				
+	msgUndefined,
+	msgBatteryLevel,
+	msgFunctionalMode,
+	msgImageSize,
+	msgCompressionSetting,
+	msgWhiteBalance,
+	msgRGBGain,
+	msgFNumber,
+	msgFocalLength,
+	msgFocusDistance,
+	msgFocusMode,
+	msgExposureMeteringMode,
+	msgFlashMode,
+	msgExposureTime,
+	msgExposureProgramMode,
+	msgExposureIndex,
+	msgExposureBiasCompensation,
+	msgDateTime,
+	msgCaptureDelay,
+	msgStillCaptureMode,
+	msgContrast,
+	msgSharpness,
+	msgDigitalZoom,
+	msgEffectMode,
+	msgBurstNumber,
+	msgBurstInterval,
+	msgTimelapseNumber,
+	msgTimelapseInterval,
+	msgFocusMeteringMode,
+	msgUploadURL,
+	msgArtist,
+	msgCopyrightInfo
 };
 
-const char* const mtpprNames[] PROGMEM = 
+const char* const mtpprNames[] PROGMEM =
 {
-	msgUndefined,					
-	msgSynchronization_Partner,		
-	msgDevice_Friendly_Name,			
-	msgVolume,						
-	msgSupportedFormatsOrdered,		
-	msgDeviceIcon,					
+	msgUndefined,
+	msgSynchronization_Partner,
+	msgDevice_Friendly_Name,
+	msgVolume,
+	msgSupportedFormatsOrdered,
+	msgDeviceIcon,
 	msgSession_Initiator_Version_Info,
-	msgPerceived_Device_Type,			
-	msgPlayback_Rate,					
-	msgPlayback_Object,				
-	msgPlayback_Container			
+	msgPerceived_Device_Type,
+	msgPlayback_Rate,
+	msgPlayback_Object,
+	msgPlayback_Container
 };
 
-const char* const acNames[] PROGMEM = 
+const char* const acNames[] PROGMEM =
 {
 	msgUndefined,
-	msgAssociation,	
-	msgScript,		
-	msgExecutable,	
-	msgText,			
-	msgHTML,			
-	msgDPOF,			
-	msgAIFF,	 		
-	msgWAV,			
-	msgMP3,		
-	msgAVI,			
-	msgMPEG,			
-	msgASF,			
-	msgQT			
+	msgAssociation,
+	msgScript,
+	msgExecutable,
+	msgText,
+	msgHTML,
+	msgDPOF,
+	msgAIFF,
+	msgWAV,
+	msgMP3,
+	msgAVI,
+	msgMPEG,
+	msgASF,
+	msgQT
 };
 
-const char* const imNames[] PROGMEM = 
+const char* const imNames[] PROGMEM =
 {
 	msgUndefined,
-	msgEXIF_JPEG,			
-	msgTIFF_EP,			
-	msgFlashPix,			
-	msgBMP,				
-	msgCIFF,				
-	msgUndefined_0x3806,	
-	msgGIF,				
-	msgJFIF,				
-	msgPCD,				
-	msgPICT,				
-	msgPNG,				
-	msgUndefined_0x380C,	
-	msgTIFF,				
-	msgTIFF_IT,			
-	msgJP2,				
-	msgJPX,				
+	msgEXIF_JPEG,
+	msgTIFF_EP,
+	msgFlashPix,
+	msgBMP,
+	msgCIFF,
+	msgUndefined_0x3806,
+	msgGIF,
+	msgJFIF,
+	msgPCD,
+	msgPICT,
+	msgPNG,
+	msgUndefined_0x380C,
+	msgTIFF,
+	msgTIFF_IT,
+	msgJP2,
+	msgJPX,
 };
 
 bool PrintPTPOperation(uint16_t op)
@@ -230,7 +229,7 @@ void PrintDevProp(uint16_t op)
 	if ((((op >> 8) & 0xFF) == 0x50) && ((op & 0xFF) <= (PTP_DPC_CopyrightInfo & 0xFF)))
 		E_Notify((char*)pgm_read_word(&ptpprNames[(op & 0xFF)]), 0x80);
 	else
-		if (((op >> 8) & 0xFF) == 0xD4) 
+		if (((op >> 8) & 0xFF) == 0xD4)
 		{
 			if ( (op & 0xFF) <= (MTP_DPC_Perceived_Device_Type & 0xFF) )
 				E_Notify((char*)pgm_read_word(&mtpprNames[(op & 0xFF)]), 0x80);
@@ -270,37 +269,37 @@ void PrintFormat(uint16_t op)
 			case MTP_OFC_Undefined_Firmware:
 				E_Notify(msgUndefined_Firmware, 0x80);
 				break;
-			case MTP_OFC_Windows_Image_Format:	
+			case MTP_OFC_Windows_Image_Format:
 				E_Notify(msgWindows_Image_Format, 0x80);
 				break;
-			case MTP_OFC_Undefined_Audio:			
+			case MTP_OFC_Undefined_Audio:
 				E_Notify(msgUndefined_Audio, 0x80);
 				break;
-			case MTP_OFC_WMA:						
+			case MTP_OFC_WMA:
 				E_Notify(msgWMA, 0x80);
 				break;
-			case MTP_OFC_OGG:						
+			case MTP_OFC_OGG:
 				E_Notify(msgOGG, 0x80);
 				break;
-			case MTP_OFC_AAC:						
+			case MTP_OFC_AAC:
 				E_Notify(msgAAC, 0x80);
 				break;
-			case MTP_OFC_Audible:					
+			case MTP_OFC_Audible:
 				E_Notify(msgAudible, 0x80);
 				break;
-			case MTP_OFC_FLAC:					
+			case MTP_OFC_FLAC:
 				E_Notify(msgFLAC, 0x80);
 				break;
-			case MTP_OFC_Undefined_Video:			
+			case MTP_OFC_Undefined_Video:
 				E_Notify(msgUndefined_Video, 0x80);
 				break;
-			case MTP_OFC_WMV:						
+			case MTP_OFC_WMV:
 				E_Notify(msgWMV, 0x80);
 				break;
-			case MTP_OFC_MP4_Container:			
+			case MTP_OFC_MP4_Container:
 				E_Notify(msgMP4_Container, 0x80);
 				break;
-			case MTP_OFC_MP2:						
+			case MTP_OFC_MP2:
 				E_Notify(msgMP2, 0x80);
 				break;
 			case MTP_OFC_3GP_Container:
@@ -311,5 +310,4 @@ void PrintFormat(uint16_t op)
 			}
 		}
 }
-
 

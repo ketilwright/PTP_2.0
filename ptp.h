@@ -137,7 +137,7 @@ protected:
 	{
 		uint16_t	opParams	:	3;			// 7	- maximum number of operation parameters
 		uint16_t	rsParams	:	3;			// 7	- maximum number of response parameters
-		uint16_t	txOperation	:	1;			// I->R operation if the flag is set
+		uint16_t	txOperation	:	1;			// initiator to responder operation if the flag is set
 		uint16_t	dataStage	:	1;			// operation has data stage if the flag is set
 		uint16_t	typeOfVoid	:	2;			// 0 - NULL, 1 - PTPReadParser/PTPDataSupplyer, 2 - WRITEPARSER, 3 - buffer pointer
 		uint16_t	dataSize	:	6;			// size of data buffer (64 bytes maximum)
@@ -146,6 +146,8 @@ protected:
 
 	void FillEPRecords(USB_ENDPOINT_DESCRIPTOR *pep);
     // ketil: huh? what's wrong with using memset?
+    // If there IS some reason why this is preferable to memset, it would be more generally
+    // useful, and ought to be a global function.
 	void ZerroMemory(uint8_t size, uint8_t *mem) { for (uint8_t i=0; i<size; i++) mem[i] = 0; };
 
 	// waits for any event to occur
@@ -157,7 +159,7 @@ protected:
 	bool CheckEvent(uint8_t size, uint8_t *buf);
 
 	uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = NULL, void *pVoid = NULL);
-    // uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params, void *pVoid);
+    //uint16_t Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params, void *pVoid);
 
 public:
 	PTP(USB *pusb, PTPStateHandlers *s);

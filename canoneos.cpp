@@ -16,6 +16,12 @@ e-mail   :  support@circuitsathome.com
 */
 #include "canoneos.h"
 
+#if defined(PTPDEBUG)
+extern void E_Notify(char const * msg, int lvl);
+extern void E_Notify(uint8_t b, int lvl);
+extern void E_NotifyStr(char const * msg, int lvl);
+extern void E_Notifyc(char c, int lvl);
+#endif
 
 void EOSStateHandlers::OnSessionOpenedState(PTP *ptp)
 {
